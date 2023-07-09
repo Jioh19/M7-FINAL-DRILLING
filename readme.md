@@ -8,9 +8,9 @@ como para el Bootcamp (bootcamp.controller.js).
 • Crear y guardar usuarios llamado createUser.
 ```js
 exports.createUser = (user) => {
-	return User.create({
-		firstName: user.firstName,
-		lastName: user.lastName,
+  return User.create({
+	firstName: user.firstName,
+	lastName: user.lastName,
 		email: user.email,
 	})
 		.then((user) => {
