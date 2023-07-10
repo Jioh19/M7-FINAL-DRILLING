@@ -87,15 +87,21 @@ const queries = async () => {
 		console.log(JSON.stringify(res, null, 2));
 		console.log("************************************************");
 	})
+
+	userController.updateById(1, {
+		firstName: "Pedro",
+		lastName: "Sanchez",
+	});
+	userController.deleteById(4);
 };
 
-// db.sequelize
-// 	.sync({
-// 		force: true,
-// 	})
-// 	.then(() => {
-// 		console.log(`Eliminando y resincronizando la base de datos.`);
-// 		run();
-// 	});
+db.sequelize
+	.sync({
+		force: true,
+	})
+	.then(() => {
+		console.log(`Eliminando y resincronizando la base de datos.`);
+		run().then(() => queries());
+	});
 
-queries();
+

@@ -62,10 +62,51 @@ exports.findAll = () => {
 		});
 };
 
-exports.updateById = (userId) => {
-
-}
+exports.updateById = (userId, user) => {
+	return User.update(
+		{
+			firstName: user.firstName,
+			lastName: user.lastName,
+			email: user.email,
+		},
+		{
+			where: {
+				id: userId,
+			},
+		}
+	)
+		.then((users) => {
+			console.log("\n*************updateById(userId, user)***********");
+			if (users > 0) {
+				console.log(`>> Se ha modificado el user id: ${userId} con ${JSON.stringify(user)}`);
+			} else {
+				console.log(`>> No existe user id: ${userId}`);
+			}
+			console.log("************************************************");
+			return users;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
 
 exports.deleteById = (userId) => {
-
-}
+	return User.destroy({
+		where: {
+			id: userId,
+		},
+	})
+		.then((users) => {
+			console.log("\n***************deleteById(userId)***************");
+			if (users > 0) {
+				console.log(`>> Se ha eliminado el user id: ${userId}`);
+			} else {
+				console.log(`>> No existe user id: ${userId}`);
+			}
+			console.log("************************************************");
+			return users;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};

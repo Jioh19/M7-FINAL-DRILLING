@@ -31,7 +31,7 @@ exports.addUser = (bootcampId, userId) => {
 				return null;
 			}
 			bootcamp.addUser(user);
-			console.log("************************************************");
+			console.log("\n************************************************");
 			console.log(`>> Agregado el usuario id=${user.id} al bootcamp con id=${bootcamp.id}`);
 			console.log("************************************************");
 			return bootcamp;

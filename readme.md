@@ -6,11 +6,12 @@ como para el Bootcamp (bootcamp.controller.js).
 ### Para el usuario, construir los siguientes controladores:
 
 • Crear y guardar usuarios llamado createUser.
+
 ```js
 exports.createUser = (user) => {
-  return User.create({
-	firstName: user.firstName,
-	lastName: user.lastName,
+	return User.create({
+		firstName: user.firstName,
+		lastName: user.lastName,
 		email: user.email,
 	})
 		.then((user) => {
@@ -24,6 +25,7 @@ exports.createUser = (user) => {
 ```
 
 • Obtener los Bootcamp de un usuario llamado findById.
+
 ```js
 exports.findById = (userId) => {
 	return User.findByPk(userId, {
@@ -48,6 +50,7 @@ exports.findById = (userId) => {
 ```
 
 • Obtener todos los Usuarios incluyendo, los Bootcamp llamado findAll.
+
 ```js
 exports.findAll = () => {
 	return User.findAll({
@@ -75,10 +78,10 @@ exports.findAll = () => {
 
 • Eliminar un usuario por Id llamado deleteById.
 
-
 ### Para el Bootcamp, construir los siguientes controladores:
 
 • Crear y guardar un nuevo Bootcamp llamado createBootcamp.
+
 ```js
 exports.createBootcamp = (bootcamp) => {
 	return Bootcamp.create({
@@ -97,6 +100,7 @@ exports.createBootcamp = (bootcamp) => {
 ```
 
 • Agregar un Usuario al Bootcamp llamado addUser.
+
 ```js
 exports.addUser = (bootcampId, userId) => {
 	return Bootcamp.findByPk(bootcampId).then((bootcamp) => {
@@ -120,6 +124,7 @@ exports.addUser = (bootcampId, userId) => {
 ```
 
 • Obtener los Bootcamp por id llamado findById.
+
 ```js
 exports.findById = (bootcampId) => {
 	return Bootcamp.findByPk(bootcampId, {
@@ -144,6 +149,7 @@ exports.findById = (bootcampId) => {
 ```
 
 • Obtener todos los Usuarios incluyendo los Bootcamp llamado findAll.
+
 ```js
 exports.findAll = () => {
 	return Bootcamp.findAll({
@@ -168,43 +174,101 @@ exports.findAll = () => {
 ```
 
 ### Realizar las siguientes consultas:
+
 • Consultando el Bootcamp por id, incluyendo los usuarios.
+
 ```js
-	bootcampController.findById(1).then((res) => {
-		console.log("\n**********bootcampController.findById()*********");
-		console.log(JSON.stringify(res, null, 2));
-		console.log("************************************************");
-	});
+bootcampController.findById(1).then((res) => {
+	console.log("\n**********bootcampController.findById()*********");
+	console.log(JSON.stringify(res, null, 2));
+	console.log("************************************************");
+});
 ```
 
 • Listar todos los Bootcamp con sus usuarios.
+
 ```js
-	bootcampController.findAll().then(res => {
-		console.log("\n*********bootcampController.findAll()***********");
-		console.log(JSON.stringify(res, null, 2));
-		console.log("************************************************");
-	})
+bootcampController.findAll().then((res) => {
+	console.log("\n*********bootcampController.findAll()***********");
+	console.log(JSON.stringify(res, null, 2));
+	console.log("************************************************");
+});
 ```
 
 • Consultar un usuario por id, incluyendo los Bootcamp.
+
 ```js
-	userController.findById(1).then(res => {
-		console.log("\n**********userController.findById()*************");
-		console.log(JSON.stringify(res, null, 2));
-		console.log("************************************************");
-	})
+userController.findById(1).then((res) => {
+	console.log("\n**********userController.findById()*************");
+	console.log(JSON.stringify(res, null, 2));
+	console.log("************************************************");
+});
 ```
 
 • Listar los usuarios con sus Bootcamp.
+
 ```js
-	userController.findAll().then(res => {
-		console.log("\n***********userController.findAll()*************");
-		console.log(JSON.stringify(res, null, 2));
-		console.log("************************************************");
-	})
+userController.findAll().then((res) => {
+	console.log("\n***********userController.findAll()*************");
+	console.log(JSON.stringify(res, null, 2));
+	console.log("************************************************");
+});
 ```
 
 • Actualizar el usuario según su id; por ejemplo: actualizar el usuario con id=1 por Pedro
 Sánchez.
 
+```js
+exports.updateById = (userId, user) => {
+	return User.update(
+		{
+			firstName: user.firstName,
+			lastName: user.lastName,
+			email: user.email,
+		},
+		{
+			where: {
+				id: userId,
+			},
+		}
+	)
+		.then((users) => {
+			console.log("\n*************updateById(userId, user)***********");
+			if (users > 0) {
+				console.log(`>> Se ha modificado el user id: ${userId} con ${JSON.stringify(user)}`);
+			} else {
+				console.log(`>> No existe user id: ${userId}`);
+			}
+			console.log("************************************************");
+			return users;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+```
+
 • Eliminar un usuario por id; por ejemplo: el usuario con id=1.
+
+```JS
+exports.deleteById = (userId) => {
+	return User.destroy({
+		where: {
+			id: userId,
+		},
+	})
+		.then((users) => {
+			console.log("\n***************deleteById(userId)***************");
+			if (users > 0) {
+				console.log(`>> Se ha eliminado el user id: ${userId}`);
+			} else {
+				console.log(`>> No existe user id: ${userId}`);
+			}
+			console.log("************************************************");
+			return users;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+```
