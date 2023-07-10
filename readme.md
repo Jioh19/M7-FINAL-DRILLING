@@ -174,6 +174,7 @@ exports.findAll = () => {
 ```
 
 ### Realizar las siguientes consultas:
+Las consultas se ejecutan después de sync.run() a través de .then(() => queries()) 
 
 • Consultando el Bootcamp por id, incluyendo los usuarios.
 
